@@ -15,15 +15,15 @@ RUN apt-get update && apt-get install -y \
     php-zip
 
 # Configuration PHP (FPM, CLI) + extensions
-COPY config/etc/php/7.0/fpm/php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
-COPY config/etc/php/7.0/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/www.conf
+COPY config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
+COPY config/etc/php/7.1/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/www.conf
 
-COPY config/etc/php/7.0/mods-available/php-custom.ini /etc/php/7.0/mods-available/php-custom.ini
-RUN ln -s /etc/php/7.0/mods-available/php-custom.ini /etc/php/7.0/fpm/conf.d/php-custom.ini
-RUN ln -s /etc/php/7.0/mods-available/php-custom.ini /etc/php/7.0/cli/conf.d/php-custom.ini
+COPY config/etc/php/7.1/mods-available/php-custom.ini /etc/php/7.1/mods-available/php-custom.ini
+RUN ln -s /etc/php/7.1/mods-available/php-custom.ini /etc/php/7.1/fpm/conf.d/php-custom.ini
+RUN ln -s /etc/php/7.1/mods-available/php-custom.ini /etc/php/7.1/cli/conf.d/php-custom.ini
 
 # La config de xdebug est automatiquement ajoutée dans fpm et cli
-COPY config/etc/php/7.0/mods-available/xdebug.ini /etc/php/7.0/mods-available/xdebug.ini
+COPY config/etc/php/7.1/mods-available/xdebug.ini /etc/php/7.1/mods-available/xdebug.ini
 
 # Installation utilitaires
 RUN apt-get install -y git iproute2 vim
@@ -37,6 +37,6 @@ WORKDIR /var/www/html
 
 EXPOSE 9000
 
-RUN service php7.0-fpm start
+RUN service php7.1-fpm start
 
 CMD php-fpm7.0 -F

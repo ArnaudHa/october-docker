@@ -39,4 +39,4 @@ EXPOSE 9000
 
 RUN service php7.1-fpm start
 
-CMD php-fpm7.0 -F
+CMD php-fpm7.1 -F

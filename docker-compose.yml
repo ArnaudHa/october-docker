@@ -28,7 +28,7 @@ services:
         volumes:
             - /srv/october/webroot:/var/www/html
     apache:
-        container_name: test_web
+        container_name: apache
         build: ./apache
         ports:
             - 60000:80

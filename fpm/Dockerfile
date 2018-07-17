@@ -15,8 +15,8 @@ RUN apt-get update && apt-get install -y \
     php-zip
 
 # Configuration PHP (FPM, CLI) + extensions
-COPY config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
-COPY config/etc/php/7.1/fpm/pool.d/www.conf /etc/php/7.0/fpm/pool.d/www.conf
+COPY config/etc/php/7.1/fpm/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
+COPY config/etc/php/7.1/fpm/pool.d/www.conf /etc/php/7.1/fpm/pool.d/www.conf
 
 COPY config/etc/php/7.1/mods-available/php-custom.ini /etc/php/7.1/mods-available/php-custom.ini
 RUN ln -s /etc/php/7.1/mods-available/php-custom.ini /etc/php/7.1/fpm/conf.d/php-custom.ini

@@ -1,0 +1,42 @@
+version: '3'
+services:
+    database:
+        container_name: database
+        build: ./database
+        ports:
+            - 60001:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: october
+            MYSQL_USER: october
+            MYSQL_PASSWORD: october
+        volumes:
+            - /srv/october/database:/var/lib/mysql
+    phpmyadmin:
+        container_name: phpmyadmin
+        build: ./phpmyadmin
+        ports:
+            - 60002:80
+        depends_on:
+            - database
+        environment:
+            - PMA_USER=root
+            - PMA_PASSWORD=root
+    fpm:
+        container_name: fpm
+        build: ./fpm
+        volumes:
+            - /srv/october/webroot:/var/www/html
+    apache:
+        container_name: test_web
+        build: ./apache
+        ports:
+            - 60000:80
+        environment:
+            FPM_HOST: fpm:9000
+            XDEBUG_CONFIG: remote_host=172.22.0.1
+        volumes:
+            - /srv/october/webroot:/var/www/html
+        depends_on:
+            - database
+            - fpm
